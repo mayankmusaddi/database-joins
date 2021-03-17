@@ -71,7 +71,17 @@ class HashJoin(Join):
             os.remove(f'{self.relation_S["filename"]}_temp{i}.txt')
 
     def run(self):
+        if self.verbose:
+            print("[1/4] Checking for feasibility")
         self.check_feasible()
+        if self.verbose:
+            print("[2/4] All conditions satisfied. Starting creation of sublists")
         self.open_join()
+        if self.verbose:
+            print("[3/4] All sublists created. Proceeding to Join them")
         self.getnext()
+        if self.verbose:
+            print("[4/4] Join complete. Closing files and deleting temp")
         self.close_join()
+        if self.verbose:
+            print("Hash Join Complete!")
