@@ -27,12 +27,12 @@ To validate the result `Join-Validator` can be used.
 
 Varying M, the time for execution was noted for both the joins. The resulting table and graph analysis are as follows:
 
-**System Configuration**
-Processor : Intel® CoreTM i5-8250U CPU @ 1.60GHz × 8
-Graphics : GeForce 940MX/PCIe/SSE2
-Memory : 7.7 GiB
-Disk : 202.4 GB
-System : ​ Ubuntu 18.04.5 LTS 64-bit
+**System Configuration**<br>
+Processor : Intel® CoreTM i5-8250U CPU @ 1.60GHz × 8<br>
+Graphics : GeForce 940MX/PCIe/SSE2<br>
+Memory : 7.7 GiB<br>
+Disk : 202.4 GB<br>
+System : ​ Ubuntu 18.04.5 LTS 64-bit<br>
 
 **Sort-Merge Join:**
 B ( R ) = 2000 and B ( S ) = 4003
@@ -44,6 +44,7 @@ B ( R ) = 2000 and B ( S ) = 4003
 | 80 | 8.444282531738281 |
 | 90 | 8.078277587890625 |
 | 100 | 7.905089855194092 |
+
 ![alt text](./plots/plt1.png)
 
 **Hash Join:**
@@ -56,4 +57,9 @@ B ( R ) = 400 and B ( S ) = 800
 | 80 | 19.062708377838135 |
 | 90 | 15.539154767990112 |
 | 100 | 15.483424425125122 |
+
 ![alt text](./plots/plt2.png)
+
+### Explanation
+
+Both the graphs are in accordance with the theory. As the memory blocks are increased, the time for execution decreases. In sort-merge join the deviation is quite subtle, while in Hash Join we find a staggered drop. One anomaly in sort-merge join is observed when M increases from 50 to 60 and so does the time. This can be explained by the following argument. As the memory block increases, the number of sublists created decreases however the length of each sublist is now greater. This leads to increase in sorting time which creation of sublists, which overpowers the decrease in time needed to merge them when memory block is 50.
